@@ -1,9 +1,9 @@
-package org.altokeapp.catalog.infrastructure.persistence.repository;
+package org.altokeapp.catalog.infrastructure.adapters.persistence.repository;
 
 import io.quarkus.hibernate.reactive.panache.PanacheRepositoryBase;
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.altokeapp.catalog.infrastructure.persistence.entity.CatalogCategoriaEntity;
+import org.altokeapp.catalog.infrastructure.adapters.persistence.entity.CatalogCategoriaEntity;
 
 import java.util.List;
 

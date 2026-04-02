@@ -1,4 +1,4 @@
-package org.altokeapp.catalog.application.dto;
+package org.altokeapp.catalog.infrastructure.adapters.rest.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

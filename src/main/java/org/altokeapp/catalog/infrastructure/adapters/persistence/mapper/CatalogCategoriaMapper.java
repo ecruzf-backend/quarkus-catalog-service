@@ -1,8 +1,8 @@
-package org.altokeapp.catalog.infrastructure.persistence.mapper;
+package org.altokeapp.catalog.infrastructure.adapters.persistence.mapper;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import org.altokeapp.catalog.domain.model.CatalogModel;
-import org.altokeapp.catalog.infrastructure.persistence.entity.CatalogCategoriaEntity;
+import org.altokeapp.catalog.infrastructure.adapters.persistence.entity.CatalogCategoriaEntity;
 
 @ApplicationScoped
 public class CatalogCategoriaMapper {

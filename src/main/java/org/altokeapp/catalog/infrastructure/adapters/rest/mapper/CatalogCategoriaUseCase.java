@@ -1,12 +1,12 @@
-package org.altokeapp.catalog.application.usecase;
+package org.altokeapp.catalog.infrastructure.adapters.rest.mapper;
 
 import io.smallrye.mutiny.Uni;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import org.altokeapp.catalog.application.dto.CatalogCategoriaRequest;
-import org.altokeapp.catalog.application.dto.CatalogCategoriaResponse;
+import org.altokeapp.catalog.application.usecase.CatalogCategoriaService;
 import org.altokeapp.catalog.domain.model.CatalogModel;
-import org.altokeapp.catalog.domain.service.CatalogCategoriaService;
+import org.altokeapp.catalog.infrastructure.adapters.rest.dto.CatalogCategoriaRequest;
+import org.altokeapp.catalog.infrastructure.adapters.rest.dto.CatalogCategoriaResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;

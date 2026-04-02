@@ -1,4 +1,4 @@
-package org.altokeapp.catalog.infrastructure.rest.controller;
+package org.altokeapp.catalog.infrastructure.adapters.rest.adapter;
 
 import io.quarkus.hibernate.reactive.panache.common.WithTransaction;
 import io.smallrye.mutiny.Uni;
@@ -7,8 +7,8 @@ import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import org.altokeapp.catalog.application.dto.CatalogCategoriaRequest;
-import org.altokeapp.catalog.application.usecase.CatalogCategoriaUseCase;
+import org.altokeapp.catalog.infrastructure.adapters.rest.dto.CatalogCategoriaRequest;
+import org.altokeapp.catalog.infrastructure.adapters.rest.mapper.CatalogCategoriaUseCase;
 
 @Path("/api/v1/categorias")
 @Produces(MediaType.APPLICATION_JSON)

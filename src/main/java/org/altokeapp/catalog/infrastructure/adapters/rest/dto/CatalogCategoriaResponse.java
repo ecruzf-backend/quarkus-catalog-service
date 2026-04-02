@@ -1,4 +1,4 @@
-package org.altokeapp.catalog.application.dto;
+package org.altokeapp.catalog.infrastructure.adapters.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
