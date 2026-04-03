@@ -1,0 +1,191 @@
+openapi: 3.0.3
+
+info:
+  title: Catalog Service API
+  description: Microservicio de catálogo con Quarkus + Arquitectura Hexagonal
+  version: 1.0.0
+  contact:
+    name: Edwin Cruz
+    email: ing.informatica.unpedwin@gmail.com
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor local desarrollo
+
+tags:
+  - name: catalog
+    description: Operaciones de catálogo
+
+paths:
+  /api/catalog:
+    get:
+      tags: [catalog]
+      summary: Listar todas las categorías
+      operationId: getAllCategorias
+      responses:
+        '200':
+          description: Lista de categorías
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CatalogResponse'
+        '500':
+          description: Error interno
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      tags: [catalog]
+      summary: Crear categoría
+      operationId: createCategoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogRequest'
+      responses:
+        '201':
+          description: Categoría creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '400':
+          description: Validación fallida
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/catalog/{id}:
+    get:
+      tags: [catalog]
+      summary: Buscar categoría por id
+      operationId: getCategoriaById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Categoría encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '404':
+          description: No encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      tags: [catalog]
+      summary: Actualizar categoría
+      operationId: updateCategoria
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CatalogRequest'
+      responses:
+        '200':
+          description: Categoría actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CatalogResponse'
+        '404':
+          description: No encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      tags: [catalog]
+      summary: Eliminar categoría
+      operationId: deleteCategoria
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Eliminada exitosamente
+        '404':
+          description: No encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+
+    CatalogRequest:
+      type: object
+      required:
+        - nombre
+        - icono
+        - activo
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          example: "Electrónicos"
+        icon:
+          type: string
+          example: "laptop.png"
+        active:
+          type: boolean
+          example: true
+
+    CatalogResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        name:
+          type: string
+          example: "Electrónicos"
+        icon:
+          type: string
+          example: "laptop.png"
+        active:
+          type: boolean
+          example: true
+        createdAt:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 404
+        message:
+          type: string
+          example: "Categoría no encontrada"
+        timestamp:
+          type: string
+          format: date-time
