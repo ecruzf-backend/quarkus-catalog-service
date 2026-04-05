@@ -1,0 +1,38 @@
+quarkus:
+  application:
+    name: catalog-service
+  http:
+    port: 8081
+    auth:
+      permission:
+        permit-all:
+          paths: /*
+          policy: permit
+
+  datasource:
+    db-kind: mysql
+    username: root
+    password: root
+    reactive:
+      url: mysql://localhost:3306/altokeapp
+
+  hibernate-orm:
+    database:
+      generation: none
+    log:
+      sql: true
+
+  swagger-ui:
+    always-include: true
+    path: /swagger-ui
+
+  smallrye-openapi:
+    info-title: Catalog Service API
+    info-version: 1.0.0
+
+  security:
+    auth:
+      enabled-in-dev-mode: false
+
+  log:
+    level: INFO

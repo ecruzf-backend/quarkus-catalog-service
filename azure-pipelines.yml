@@ -1,0 +1,52 @@
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+  acrName: 'acrcatalogservice'
+  acrLoginServer: 'acrcatalogservice.azurecr.io'
+  imageName: 'catalog-service'
+  resourceGroup: 'rg-catalog-service'
+  aksCluster: 'aks-catalog-service'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: 'Build & Push Image'
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: 'Build and Push to ACR'
+      inputs:
+        containerRegistry: 'acr-connection'
+        repository: '$(imageName)'
+        command: 'buildAndPush'
+        Dockerfile: 'Dockerfile'
+        tags: |
+          $(tag)
+          latest
+
+- stage: Deploy
+  displayName: 'Deploy to AKS'
+  dependsOn: Build
+  jobs:
+  - job: DeployJob
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: KubernetesManifest@1
+      displayName: 'Deploy to AKS'
+      inputs:
+        action: 'deploy'
+        connectionType: 'azureResourceManager'
+        azureSubscriptionConnection: 'azure-connection'
+        azureResourceGroup: '$(resourceGroup)'
+        kubernetesCluster: '$(aksCluster)'
+        manifests: |
+          k8s/deployment.yml
+          k8s/service.yml
+        containers: '$(acrLoginServer)/$(imageName):$(tag)'
