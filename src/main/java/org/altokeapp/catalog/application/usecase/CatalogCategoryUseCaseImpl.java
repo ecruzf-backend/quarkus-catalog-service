@@ -39,7 +39,7 @@ public class CatalogCategoryUseCaseImpl implements CatalogInputPort {
     public Uni<CatalogModel> getCategoryById(String id) {
         return catalogOutputPort.getCategoryById(id)
                 .onItem().transform(opt -> opt.orElseThrow(
-                        () -> new ResourceNotFoundException("Categoría no encontrada con id: " + id)
+                        () -> new ResourceNotFoundException("Categoría no encontrada con id: {}" + id)
                 ));
     }
 
@@ -98,7 +98,7 @@ public class CatalogCategoryUseCaseImpl implements CatalogInputPort {
                             && !opt.get().id().equals(id);
                     return existeEnOtroRegistro
                             ? Uni.createFrom().failure(
-                            new BusinessException("Ya existe una categoría con nombre: " + name))
+                            new BusinessException("Ya esta una categoría con nombre: " + name))
                             : Uni.createFrom().voidItem();
                 });
     }
